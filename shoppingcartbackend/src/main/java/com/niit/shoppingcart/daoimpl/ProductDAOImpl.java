@@ -15,12 +15,12 @@ public class ProductDAOImpl implements ProductDAO {
 	private SessionFactory sessionFactory;
 	public boolean save(Product product) {
 try {
-			
+	System.out.println("In SAve Product Try ..."+product.getId()+product.getName());
 			sessionFactory.getCurrentSession().save(product);
 			return true;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("In SAve Product Catch ..."+e.getMessage());
 			return false;
 		}
 		
@@ -39,9 +39,9 @@ try {
 		
 	}
 
-	public Product get(String emailID) {
+	public Product get(String id) {
 		try {
-			Product product= (Product)sessionFactory.getCurrentSession().get(Category.class,emailID);
+			Product product= (Product)sessionFactory.getCurrentSession().get(Product.class,id);
 			   return product;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -50,9 +50,9 @@ try {
 		
 	}
 
-	public boolean delete(String emailID) {
+	public boolean delete(String id) {
 		try {
-			Product product=get(emailID);
+			Product product=get(id);
 			if(product==null)
 			{
 				return false;
@@ -68,9 +68,18 @@ try {
 	}
 
 	public List<Product> list() {
-		return sessionFactory.getCurrentSession().createQuery("from Supplier").list();
+		return sessionFactory.getCurrentSession().createQuery("from Product").list();
 		
 	}
+
+	public List<Product> listbyCat(String id) {
+		// TODO Auto-generated method stub
+		return sessionFactory.getCurrentSession().createQuery("from Product where CID='"+id+"'").list();
+	}
+
+	
+
+
 		
 
 }

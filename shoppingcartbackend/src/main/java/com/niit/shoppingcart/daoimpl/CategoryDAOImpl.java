@@ -38,10 +38,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return false;
 		}
 	}
-	public Category get(String emailID)
+	public Category get(String ID)
 	{
 		   try {
-			Category category= (Category)sessionFactory.getCurrentSession().get(Category.class,emailID);
+			Category category= (Category)sessionFactory.getCurrentSession().get(Category.class,ID);
 			   return category;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -49,10 +49,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}
 		
 	}
-	public boolean delete(String emailID)
+	public boolean delete(String ID)
 	{
 		try {
-			Category category=get(emailID);
+			Category category=get(ID);
 			if(category==null)
 			{
 				return false;
@@ -71,6 +71,8 @@ public class CategoryDAOImpl implements CategoryDAO {
 		
 		return sessionFactory.getCurrentSession().createQuery("from Category").list();
 	}
+
+	
 }
 
 

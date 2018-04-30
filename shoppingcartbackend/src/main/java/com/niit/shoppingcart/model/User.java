@@ -14,7 +14,7 @@ public class User {
 	private String name;
 	private String password;
 	private String mobile;
-	private Character role;
+	private String role;
 	private String registeredDate;
 	public String getEmailID() {
 		return emailID;
@@ -40,10 +40,10 @@ public class User {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public Character getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(Character role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	public String getRegisteredDate() {

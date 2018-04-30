@@ -9,29 +9,41 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+
+<h1>${error}</h1>
 <div class="container">
 	<div class="row">
         <div class="col-md-6">
-            <form action="log" method="post">
+            <form action="j_spring_security_check" method="post">
           
             <div class="form-group">
-            <label for="username"><span class="req">* </span> username: </label>
-                    <input required type="text" name="username" id="phone" class="form-control phone" maxlength="28"  placeholder="not used for marketing"/> 
+            <label for="email">Email address:</label> 
+    <input type="email" class="form-control" id="email" name="username">
+              </div>
+
+            <div class="form-group"> 
+             <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" name="password">	 
+                
             </div>
-
-            <div class="form-group"> 	 
-                <label for="password"><span class="req">* </span> password: </label>
-                    <input class="form-control" type="text" name="password" id = "txt"  required /> 
-                        <div id="errFirst"></div>    
-            </div>
-
-            <div class="form-group">
-                <input class="btn btn-success" type="submit" name="submit_reg" value="login">
-            </div>
-        
-            </form><!-- ends register form -->
-
-
-</div>
+             
+  <div class="checkbox">
+    <label><input type="checkbox"> Remember me</label>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+ </div>
+ </div>
+ </div>
+ <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+ <jsp:include page="footer.jsp"></jsp:include>
+ 
 </body>
 </html>

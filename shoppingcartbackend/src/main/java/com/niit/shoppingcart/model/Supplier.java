@@ -1,16 +1,15 @@
 package com.niit.shoppingcart.model;
+import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table
-public class Supplier {
+public class Supplier implements Serializable {
 	@Id
 	private String id;
 	private String name;
@@ -45,6 +44,11 @@ public class Supplier {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Override
+	public String toString() {
+		return "Supplier [id=" + id + ", name=" + name + ", address=" + address + ", product=" + product + "]";
+	}
+	
 	
 	}
 	

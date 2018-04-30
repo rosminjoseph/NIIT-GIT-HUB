@@ -28,9 +28,11 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
-	
-	
+		 <!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="30000000" />
 
-</beans>
+</bean>
+	</beans>

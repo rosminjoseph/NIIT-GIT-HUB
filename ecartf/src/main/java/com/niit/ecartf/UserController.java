@@ -1,12 +1,14 @@
 package com.niit.ecartf;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.UserDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.User;
 
 @Controller
@@ -14,23 +16,9 @@ import com.niit.shoppingcart.model.User;
 public class UserController {
 	@Autowired
 	private UserDAO userdao;
-	
-	@RequestMapping("/log")
-	public ModelAndView validate(@RequestParam("username")String username,@RequestParam("password")String password)
-	{
-		//System.out.println("In validate");
-		ModelAndView mv=new ModelAndView("home");
-		if(userdao.validate(username,password)==null )
-		{
-			mv.addObject("Errormessage","Invalid credential,plz try again");
-			
-		}
-		else
-		{
-			mv.addObject("Welcomemessage","Welcome Mr./Ms. "+username);
-		}
-		return mv;
-	}
+	@Autowired
+	private CategoryDAO categorydao;
+
 	/*@RequestMapping("/logout")
 	public ModelAndView logout()
 	{
@@ -43,41 +31,68 @@ public class UserController {
 
 
 	@RequestMapping("/reg")
-	public ModelAndView register(@RequestParam("phnno")String phnno,@RequestParam("username")String username,@RequestParam("emailid")String emailid,@RequestParam("password")String password)
+	public ModelAndView register(@RequestParam("phnno")String phnno,@RequestParam("username")String username,@RequestParam("id")String emailid,@RequestParam("password")String password)
 	//public ModelAndView register(@RequestBody User user)
 	{
-		ModelAndView mv=new ModelAndView("home");
+		ModelAndView mv=new ModelAndView("redirect:/login");
 		User user=new User();
 		user.setEmailID(emailid);
 		user.setMobile(phnno);
 		user.setName(username);
 		user.setPassword(password);
-		user.setRole('c');
+		user.setRole("USER");
+		List<Category> categories=categorydao.list();
+		mv.addObject("categories", categories);
 		//user.setRegisteredDate(new Date(System.currentTimeMillis()));
 		
 		
 		//System.out.println(name+"---"+password+"---"+m+"---"+mail);
+		try
+		{
 		if(userdao.save_user(user))
 		{
-			mv.addObject("successmessage","Successfully Registered..");
+			mv.addObject("error","Successfully Registered..");
 		}
 		else
 		{
-			mv.addObject("failuremessage","Not Registered..try again");
+			mv.addObject("error","Not Registered..try again");
+		}
+		}
+		catch(Exception e)
+		{
+			mv.addObject("error","Not Registered..Email ID already exist");
 		}
 		return mv;
 	}
 	@RequestMapping("/register")
-	String nuser()
+	String nuser(Model mv)
 	{
+		
+
+		List<Category> categories=categorydao.list();
+		mv.addAttribute("categories", categories);
 		return "register";
 	}
+	
 	@RequestMapping("/login")
-	String euser()
+	String euser(Model m,@RequestParam("error")String error)
 	{
+		List<Category> categories = categorydao.list();
+		m.addAttribute("categories", categories);
+		m.addAttribute("error", error);
 		return "login";
+		
 	}
-}
+	@RequestMapping("/homecss")
+	String css()
+	{
+		return "homecss";
+	}
+
+	
+	}
+
+
 
 
 

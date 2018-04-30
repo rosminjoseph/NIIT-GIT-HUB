@@ -20,9 +20,10 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Transactional
-	public User get_user(String emailID) 
+	public User get_user(String id) 
 	{
-		return (User) sessionfactory.getCurrentSession().load(User.class,emailID);
+		System.out.println("in get user----------"+id);
+		return (User) sessionfactory.openSession().load(User.class,id);
 	}
 
 	@Transactional
@@ -33,7 +34,7 @@ public class UserDAOImpl implements UserDAO{
 		try {
 			sessionfactory.getCurrentSession().save(user);
 			return true;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -41,9 +42,9 @@ public class UserDAOImpl implements UserDAO{
 	
 
 	@Transactional
-	public User validate(String emailID,String password)
+	public User validate(String id,String password)
 	{
-		return(User)sessionfactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("emailID",emailID)).add(Restrictions.eq("password",password)).uniqueResult();
+		return(User)sessionfactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("emailID",id)).add(Restrictions.eq("password",password)).uniqueResult();
 	}
 
 	public boolean update_user(User user) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,15 +10,9 @@
 
 </head>
 <body>
-${successmessage}
-${failuremessage} 
-
 <jsp:include page="header.jsp"></jsp:include>
-<h1>welcome</h1>
 
-<a href="Category"> Create Category</a>
-<a href="supplier"> Create Supplier</a>
-<a href="product"> Create Product</a>
+
 <div class="container">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -30,16 +25,15 @@ ${failuremessage}
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="resources/images/demo.jpg" alt="Los Angeles" style="width:100%;">
+        <img src="resources/images/pid${products[0].id}.jpg" alt="Los Angeles" style="width:70%;height: 400px;">
       </div>
 
+       <c:forEach var="c" items="${products}">
       <div class="item">
-        <img src="resources/images/2.jpg" alt="Chicago" style="width:100%;">
+        <img src="resources/images/pid${c.id}.jpg" alt="Chicago" style="width:70%;height: 400px;">
       </div>
-    
-      <div class="item">
-        <img src="resources/images/3.jpg" alt="New york" style="width:100%;">
-      </div>
+    </c:forEach>
+      
     </div>
 
     <!-- Left and right controls -->
@@ -53,11 +47,11 @@ ${failuremessage}
     </a>
   </div>
 </div>
-
+<br/>
 <div class="container bootstrap snippet">
     <div class="row">
        
-        <div class="col-md-9">
+       <!--  <div class="col-md-9"> -->
             <div class="col-md-6 col-sm-6">
                 <div class="store-item">
                     <div class="store-item-rating text-warning">
@@ -69,14 +63,15 @@ ${failuremessage}
                     </div>
                     <div class="store-item-image">
                         <a href="#">
-                            <img src="https://lorempixel.com/300/200/technics/1/" alt="" class="img-responsive">
+                            <img src="resources/images/pid${products[0].id}.jpg" alt="" class="img-responsive">
                         </a>
                     </div>
-                    <div class="store-item-info clearfix">
-                        <span class="store-item-price themed-color-dark pull-right">$ 109</span>
-                        <a href="#"><strong>Product one</strong></a><br>
+                     <div class="store-item-info clearfix">
+                        <span class="store-item-price themed-color-dark pull-right">$ ${products[0].price}</span>
+                        <h3><a href="#"><strong>${products[0].name}</strong></a></h3>
+                        <h4><i>${products[0].description}</i></h4>
                         <small><i class="fa fa-shopping-cart text-muted"></i>
-                        <a href="#" class="text-muted">Add to cart</a></small>
+                        <a href="prodet?id=${products[0].id}" class="text-muted">View More...</a></small>
                     </div>
                 </div>
             </div> 
@@ -91,69 +86,29 @@ ${failuremessage}
                     </div>
                     <div class="store-item-image">
                         <a href="#">
-                            <img src="https://lorempixel.com/300/200/technics/3/" alt="" class="img-responsive">
+                            <img src="resources/images/pid${products[1].id}.jpg" alt="" class="img-responsive">
                         </a>
                     </div>
                     <div class="store-item-info clearfix">
-                        <span class="store-item-price themed-color-dark pull-right">$ 109</span>
-                        <a href="#"><strong>Product two</strong></a><br>
+                        <span class="store-item-price themed-color-dark pull-right">$ ${products[1].price}</span>
+                        <h3><a href="#"><strong>${products[1].name}</strong></a></h3>
+                        <h4><i>${products[1].description}</i></h4>
                         <small><i class="fa fa-shopping-cart text-muted"></i>
-                        <a href="#" class="text-muted">Add to cart</a></small>
+                        <a href="prodet?id=${products[1].id}" class="text-muted">View More...</a></small>
                     </div>
                 </div>
             </div>  
-            <div class="col-md-6 col-sm-6">
-                <div class="store-item">
-                    <div class="store-item-rating text-warning">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                    </div>
-                    <div class="store-item-image">
-                        <a href="#">
-                            <img src="https://lorempixel.com/300/200/technics/9/" alt="" class="img-responsive">
-                        </a>
-                    </div>
-                    <div class="store-item-info clearfix">
-                        <span class="store-item-price themed-color-dark pull-right">$ 109</span>
-                        <a href="#"><strong>Product</strong></a><br>
-                        <small><i class="fa fa-shopping-cart text-muted"></i>
-                        <a href="#" class="text-muted">Add to cart</a></small>
-                    </div>
-                </div>
-            </div>  
-            <div class="col-md-6 col-sm-6">
-                <div class="store-item">
-                    <div class="store-item-rating text-warning">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                    </div>
-                    <div class="store-item-image">
-                        <a href="#">
-                            <img src="https://lorempixel.com/300/200/technics/7/" alt="" class="img-responsive">
-                        </a>
-                    </div>
-                    <div class="store-item-info clearfix">
-                        <span class="store-item-price themed-color-dark pull-right">$ 109</span>
-                        <a href="#"><strong>Sunglasses</strong></a><br>
-                        <small><i class="fa fa-shopping-cart text-muted"></i>
-                        <a href="#" class="text-muted">Add to cart</a></small>
-                    </div>
-                </div>
+            
             </div>            
 	    </div>
 	</div>
-</div>
+<!-- </div> -->
 
 
 </br>
 </br>
-
+<br/>
+<br/>
 
 
 

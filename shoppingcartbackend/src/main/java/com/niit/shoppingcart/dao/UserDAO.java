@@ -1,14 +1,11 @@
 package com.niit.shoppingcart.dao;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.niit.shoppingcart.model.User;
 
 public interface UserDAO {
 	
-	public User get_user(String emailID);
+	public User get_user(String id);
 
 	public boolean save_user(User user);
 
